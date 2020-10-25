@@ -1,0 +1,19 @@
+{
+  "name": "check-for-updates",
+  "version": "1.0.0",
+  "description": "NPM module to check a github repository for the lastest release",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/b3nd3r-ssbm/check-for-updates.git"
+  },
+  "author": "b3nd3r-ssbm",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/b3nd3r-ssbm/check-for-updates/issues"
+  },
+  "homepage": "https://github.com/b3nd3r-ssbm/check-for-updates#readme"
+}
