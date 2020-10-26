@@ -1,7 +1,6 @@
 const https = require('https');
 const fs = require('fs');
 
-let i=0;
 const package=JSON.parse(fs.readFileSync('package.json'));
 let author=package.author;
 let name=package.name;
@@ -11,6 +10,7 @@ const options={
     'User-Agent': 'check-for-updates'
   }
 }
+
 exports.check = function() {
   return check;
 }
