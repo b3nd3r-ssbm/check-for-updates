@@ -35,16 +35,20 @@ function checkLogic(json) {
   let newTag = tagInt(json["tag_name"]);
   let oldTag = tagInt("v"+package.version);
   let retJson={};
+  retJson.url = json["html_url"];
   if(newTag[0] > oldTag[0]) {
     retJson.isNew = true;
+    return retJson;
   }
   else if(newTag[0] == oldTag[0]){
     if(newTag[1] > oldTag[1]) {
       retJson.isNew = true;
+	  return retJson;
 	}
 	else if(newTag[1] == oldTag[1]) {
       if(newTag[2] > oldTag[2]) {
         retJson.isNew = true;
+		return retJson;
 	  }
 	  else {
         retJson.isNew = false;
@@ -62,7 +66,6 @@ function checkLogic(json) {
       retJson.isNew = false;
 	}
   }
-  retJson.url = json["html_url"];
   return retJson;
 }
 
@@ -70,10 +73,10 @@ function tagInt(tagName) {
   let majorStr = tagName.substring(tagName.indexOf("v")+1,tagName.indexOf("."));
   major = parseInt(majorStr);
   tagName = tagName.substring(tagName.indexOf("v"+majorStr)+majorStr.length+2);
-  let minorStr=tagName.substring(tagName.indexOf("."));
+  let minorStr=tagName.substring(0,tagName.indexOf("."));
   let minor = parseInt(minorStr);
   tagName = tagName.substring(tagName.indexOf("."));
-  let patchStr = tagName.substring(0,tagName.indexOf("."));
+  let patchStr = tagName.substring(1);
   let patch = parseInt(patchStr);
   return [major,minor,patch];
 }
