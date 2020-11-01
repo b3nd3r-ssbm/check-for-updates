@@ -11,11 +11,11 @@ const options={
   }
 }
 
-exports.check = function() {
-  return check;
+function check() {
+  return check1;
 }
 
-let check = new Promise((resolve,reject) => {
+let check1 = new Promise((resolve,reject) => {
   let url="https://api.github.com/repos/"+author+"/"+name+"/releases/latest";
   https.get(url, options,(res) => {
     let body = "";
@@ -23,7 +23,23 @@ let check = new Promise((resolve,reject) => {
       body += chunk;
     });
     res.on("end", () => {
-      let returnVal = checkLogic(JSON.parse(body));
+	  let returnVal = checkLogic(JSON.parse(body));
+      resolve(returnVal);
+    });
+    }).on("error", (error) => {
+      console.error(error.message);
+  });
+});
+
+let checkLatest = new Promise((resolve,reject) => {
+  let url="https://api.github.com/repos/"+author+"/"+name+"/releases/latest";
+  https.get(url, options,(res) => {
+    let body = "";
+    res.on("data", (chunk) => {
+      body += chunk;
+    });
+    res.on("end", () => {
+      let returnVal = JSON.parse(body)["tag_name"];
       resolve(returnVal);
     });
     }).on("error", (error) => {
@@ -80,3 +96,8 @@ function tagInt(tagName) {
   let patch = parseInt(patchStr);
   return [major,minor,patch];
 }
+
+function getLatest() {
+  return checkLatest;
+}
+module.exports = { check, getLatest };

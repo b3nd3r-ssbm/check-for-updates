@@ -1,6 +1,6 @@
 {
   "name": "check-for-updates",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "NPM module to check a github repository for the lastest release",
   "main": "index.js",
   "scripts": {
